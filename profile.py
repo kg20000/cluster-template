@@ -31,7 +31,6 @@ tour = IG.Tour()
 tour.Description(IG.Tour.TEXT,tourDescription)
 request.addTour(tour)
 
-
 link = request.LAN("lan")
 
 for i in range(0, 3):
