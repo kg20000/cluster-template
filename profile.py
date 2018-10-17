@@ -7,6 +7,9 @@ import geni.rspec.igext as IG
 # Create a portal context.
 pc = portal.Context()
 
+pc.defineParameter( "n", "Number of compute nodes, number from 2 to 12", portal.ParameterType.INTEGER, 4 )
+params = pc.bindParameters()
+
 # Create a Request object to start building the RSpec.
 request = pc.makeRequestRSpec()
 
@@ -35,13 +38,12 @@ request.addTour(tour)
 
 link = request.LAN("lan")
 
-for i in range(6):
+#for i in range(12):
+for i in range(0, params.n + 2):
   if i == 0:
     node = request.XenVM("head")
     node.routable_control_ip = "true"
   elif i == 1:
-    node = request.XenVM("metadata")
-  elif i == 2:
     node = request.XenVM("storage")
   else:
     node = request.XenVM("compute-" + str(i))
@@ -57,10 +59,28 @@ for i in range(6):
   
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless.sh"))
-  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
-  node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
   
-  node.addService(pg.Execute(shell="sh", command="sudo su lngo -c 'cp /local/repository/source/* /users/lngo'"))
+	#Head node
+  if i == 0:  
+	  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_head_setup.sh"))
+	  node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_head_setup.sh" + str(params.n)))
+	#Storage node
+  elif i == 1:
+	  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsstorage.sh"))
+      node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsstorage.sh " + str(params.n)))
+	#All remaining nodes
+  else:
+	  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsclient.sh"))
+      node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsclient.sh"))
+  
+  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_ssh_setup.sh"))
+  node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_ssh_setup.sh"))
+  
+  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ssh_setup.sh"))
+  #node.addService(pg.Execute(shell="sh", command="sudo -H -u lngo bash -c '/local/repository/ssh_setup.sh'"))
+  node.addService(pg.Execute(shell="sh", command="sudo -H -u BC843101 bash -c '/local/repository/ssh_setup.sh'"))
+  
+  #node.addService(pg.Execute(shell="sh", command="sudo su lngo -c 'cp /local/repository/source/* /users/lngo'"))
   
 # Print the RSpec to the enclosing page.
 pc.printRequestRSpec(request)
