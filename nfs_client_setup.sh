@@ -15,6 +15,6 @@ mount -t nfs 192.168.1.2:/scratch /scratch
 #  sleep 30
 #done
 
-echo "export PATH='$PATH:/software/bin'" >> /users/jk880380/.bashrc
+echo "export PATH='$PATH:/software/bin'" >> /users/BC843101/.bashrc
 echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/software/lib/'" >> /users/BC843101/.bashrc
 source /users/BC843101/.bashrc
