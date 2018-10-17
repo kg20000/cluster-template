@@ -27,5 +27,7 @@ ssh-keyscan -H 192.168.1.13 >> ~/.ssh/known_hosts
 ssh 192.168.1.13 -f 'sleep 5'
 ssh-keyscan -H 192.168.1.13 >> ~/.ssh/known_hosts
 ssh 192.168.1.14 -f 'sleep 5'
+ssh-keyscan -H 192.168.1.14 >> ~/.ssh/known_hosts
+ssh 192.168.1.15 -f 'sleep 5'
 ssh-keyscan -H 192.168.1.15 >> ~/.ssh/known_hosts
 ssh 192.168.1.15 -f 'sleep 5'
