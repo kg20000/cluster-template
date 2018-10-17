@@ -10,10 +10,7 @@ mkdir /scratch
 mount -t nfs 192.168.1.1:/software /software
 mount -t nfs 192.168.1.2:/scratch /scratch
 
-#while [ ! -d /software/flagdir ]
-#do
-#  sleep 30
-#done
+sleep 30
 
 echo "export PATH='$PATH:/software/bin'" >> /users/BC843101/.bashrc
 echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/software/lib/'" >> /users/BC843101/.bashrc
