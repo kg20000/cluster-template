@@ -34,5 +34,6 @@ sudo make all install
 echo "export PATH='$PATH:/software/bin'" >> /users/BC843101/.bashrc
 echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/software/bin'" >> /users/BC843101/.bashrc
 cd ..
+mkdir /software/testFolder
 sudo rm -Rf openmpi-3.1.2
 sudo rm -Rf openmpi-3.1.2.tar.gz
