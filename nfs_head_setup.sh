@@ -19,7 +19,7 @@ for i in range (2,13):
 #mkdir /software
 #mount -t nfs 192.168.1.1:/software /software
 
-exportfs -a
+#exportfs -a
 
 set -x
 sudo yum -y group install "Development Tools"
