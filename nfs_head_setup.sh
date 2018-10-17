@@ -8,6 +8,9 @@ chkconfig --level 35 nfs on
 
 sudo mkdir /software
 
+sudo systemctl enable nfs-server.service
+sudo systemctl start nfs-server.service
+
 sudo vi /etc/exports
 
 #TODO make to for loop 
