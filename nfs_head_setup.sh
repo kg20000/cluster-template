@@ -1,22 +1,26 @@
-#!/bin/bash
-sudo yum -y install nfs-utils nfs-utils-lib
-chkconfig nfs on
-service rpcbind start
-service nfs start
-mkdir /software
-chmod 755 /software
+sudo yum install -y nfs-utils nfs-utils-lib
+sudo yum install -y portmap
 
-for i in range (2,13):
-	echo "/software 192.168.1." + i + "(rw,sync,no_root_squash)" >> /etc/exports
-	#echo "/software 192.168.1." + i + "(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-	#echo "/software compute-" + i + "(rw,sync,no_root_squash)" >> /etc/exports
+/etc/init.d/portmap start
+/etc/init.d/nfs start
+chkconfig --level 35 portmap on
+chkconfig --level 35 nfs on
 
-#sudo service rpcbind start
-#sudo service nfs start
-#sudo service portmap start
-#sudo mkdir /mnt/scratch
-#sudo mount -t nfs storage:/scratch /mnt/scratch
-#mkdir /software
-#mount -t nfs 192.168.1.1:/software /software
+sudo mkdir /software
 
-#exportfs -a
+sudo vi /etc/exports
+
+#TODO make to for loop 
+/software 192.168.1.2(rw,sync,no_root_squash)
+/software 192.168.1.3(rw,sync,no_root_squash)
+/software 192.168.1.4(rw,sync,no_root_squash)
+/software 192.168.1.5(rw,sync,no_root_squash)
+/software 192.168.1.6(rw,sync,no_root_squash)
+/software 192.168.1.7(rw,sync,no_root_squash)
+/software 192.168.1.8(rw,sync,no_root_squash)
+/software 192.168.1.9(rw,sync,no_root_squash)
+/software 192.168.1.10(rw,sync,no_root_squash)
+/software 192.168.1.11(rw,sync,no_root_squash)
+/software 192.168.1.12(rw,sync,no_root_squash)
+/software 192.168.1.13(rw,sync,no_root_squash)
+/software 192.168.1.14(rw,sync,no_root_squash)
