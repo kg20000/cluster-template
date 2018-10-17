@@ -1,5 +1,4 @@
-
-udo yum -y install nfs-utils nfs-utils-lib
+sudo yum -y install nfs-utils nfs-utils-lib
 sudo yum -y install portmap
 
 /etc/init.d/portmap start
