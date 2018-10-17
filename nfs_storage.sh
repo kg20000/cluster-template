@@ -1,11 +1,16 @@
 #!/bin/sh
 
-yum install -y nfs-utils nfs-utils-lib
+sudo yum install -y nfs-utils nfs-utils-lib
+/etc/init.d/nfs start
+/etc/init.d/nfs start
+chkconfig --level 35 portmap on
+chkconfig --level 35 nfs on
+
 chkconfig nfs on
 service rpcbind start
 service nfs start
 #mkdir /software
-mkdir /scratch
+sudo mkdir /scratch
 touch /scratch/machine_list
 touch /etc/exports
 
