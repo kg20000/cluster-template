@@ -35,15 +35,15 @@ request.addTour(tour)
 link = request.LAN("lan")
 
 for i in range(0, 15):
-  if i == 0:
-    node = request.XenVM("head")
-    node.routable_control_ip = "true"
-  elif i == 1:
-    node = request.XenVM("storage")
-  else:
-    node = request.XenVM("compute-" + str(i))
-    node.cores = 2
-    node.ram = 4096
+	if i == 0:
+		node = request.XenVM("head")
+		node.routable_control_ip = "true"
+	elif i == 1:
+		node = request.XenVM("storage")
+	else:
+		node = request.XenVM("compute-" + str(i))
+		node.cores = 2
+		node.ram = 4096
     
   node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
   
@@ -57,16 +57,16 @@ for i in range(0, 15):
   
 	#Head node
   if i == 0:  
-	  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_head_setup.sh"))
-	  node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_head_setup.sh"))
+	node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_head_setup.sh"))
+	node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_head_setup.sh"))
 	#Storage node
   elif i == 1:
-	  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsstorage.sh"))
-      node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsstorage.sh "))
+	node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsstorage.sh"))
+	node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsstorage.sh "))
 	#All remaining nodes
   else:
-	  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsclient.sh"))
-      node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsclient.sh"))
+	node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsclient.sh"))
+	node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsclient.sh"))
   
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_ssh_setup.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_ssh_setup.sh"))
