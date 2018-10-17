@@ -4,7 +4,7 @@ chkconfig nfs on
 service rpcbind start
 service nfs start
 mkdir /software
-chmod 777 /software
+chmod 755 /software
 
 for i in range (2,13):
 	echo "/software 192.168.1." + i + "(rw,sync,no_root_squash)" >> /etc/exports
