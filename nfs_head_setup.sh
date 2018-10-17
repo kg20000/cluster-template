@@ -6,18 +6,10 @@ service nfs start
 mkdir /software
 chmod 777 /software
 
-# Create the permissions file for the NFS directory.
-computes=$(($1 + 1))
-for i in $(seq $computes)
-do
-  st='/software 192.168.1.'
-  st+=$(($i))
-  st+='(rw,sync,no_root_squash,no_subtree_check)'
-  echo $st >> /etc/exports
-done
-
-for i in range (1,13):
-	sudo echo "/software compute-" + i + "(rw,sync,no_root_squash)" >> /etc/exports
+for i in range (2,13):
+	echo "/software 192.168.1." + i + "(rw,sync,no_root_squash)" >> /etc/exports
+	#echo "/software 192.168.1." + i + "(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
+	#echo "/software compute-" + i + "(rw,sync,no_root_squash)" >> /etc/exports
 
 #sudo service nfs start
 #sudo service portmap start
