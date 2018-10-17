@@ -2,9 +2,9 @@
 sudo yum install -y nfs-utils nfs-utils-lib
 sudo yum -y install portmap
 
-chkconfig nfs on
-service rpcbind start
-service nfs start
+sudo chkconfig nfs on
+sudo service rpcbind start
+sudo service nfs start
 sudo mkdir /software
 sudo mkdir /scratch
 #sleep 600
