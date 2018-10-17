@@ -33,8 +33,9 @@ request.addTour(tour)
 
 link = request.LAN("lan")
 
-for i in range(0, 4):
 #for i in range(0, 15):
+
+for i in range(0, 4):
 	if i == 0:
 		node = request.XenVM("head")
 		node.routable_control_ip = "true"
@@ -87,6 +88,7 @@ for i in range(0, 4):
 	node.addService(pg.Execute(shell="sh", command="sudo -H -u BC843101 bash -c '/local/repository/ssh_setup.sh'"))
 	
 	node.addService(pg.Execute(shell="sh", command="sudo su BC843101 -c 'cp /local/repository/source/* /users/BC843101'"))
+	node.addService(pg.Execute(shell="sh", command="sudo cp /local/repository/source/* /scratch"))
 	#node.addService(pg.Execute(shell="sh", command="sudo su lngo -c 'cp /local/repository/source/* /users/lngo'"))
 
 # Print the RSpec to the enclosing page.
