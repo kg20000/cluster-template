@@ -65,8 +65,8 @@ for i in range(0, 4):
 		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
 	#Storage node
 	elif i == 1:
-		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_storage.sh"))
-		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_storage.sh "))
+		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_storage_setup.sh"))
+		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_storage_setup.sh "))
 	#All remaining nodes
 	else:
 		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_client_setup.sh"))
