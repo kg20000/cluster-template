@@ -62,8 +62,8 @@ for i in range(0, 4):
 	if i == 0:  
 		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_head_setup.sh"))
 		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_head_setup.sh"))
-		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
-		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
+		#node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
+		#node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
 	#Storage node
 	elif i == 2:
 		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountStorage.sh"))
@@ -77,8 +77,8 @@ for i in range(0, 4):
 		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountStorage.sh"))
 		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mountStorage.sh"))
 
-	#node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
-	#node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
+	node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
+	node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
 		
 	node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ssh_setup.sh"))
 	node.addService(pg.Execute(shell="sh", command="sudo /local/repository/ssh_setup.sh"))
