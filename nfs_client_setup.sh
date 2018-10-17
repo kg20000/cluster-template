@@ -7,8 +7,8 @@ mkdir /software
 mkdir /scratch
 #sleep 600
 #sleep 300
-mount -t nfs 192.168.1.1:/software /software
-mount -t nfs 192.168.1.2:/scratch /scratch
+sudo mount -t nfs 192.168.1.1:/software /software
+sudo mount -t nfs 192.168.1.2:/scratch /scratch
 
 sleep 30
 
