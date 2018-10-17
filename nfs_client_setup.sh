@@ -1,5 +1,5 @@
 #!/bin/sh
-sudo yum install -y nfs-utils nfs-utils-lib
+sudo yum -y install nfs-utils nfs-utils-lib
 sudo yum -y install portmap
 
 sudo chkconfig nfs on
