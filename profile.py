@@ -59,24 +59,26 @@ for i in range(0, 3):
 	if i == 0:  
 		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_head_setup.sh"))
 		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_head_setup.sh"))
-		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
-		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
 	#Storage node
 	elif i == 1:
-		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsstorage.sh"))
-		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsstorage.sh "))
+		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_storage.sh"))
+		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_storage.sh "))
 	#All remaining nodes
 	else:
-		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsclient.sh"))
-		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsclient.sh"))
+		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_client_setup.sh"))
+		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_client_setup.sh"))
 
-	node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_ssh_setup.sh"))
-	node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_ssh_setup.sh"))
-
+	node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
+	node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
+		
+	node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ssh_setup.sh"))
+	node.addService(pg.Execute(shell="sh", command="sudo /local/repository/ssh_setup.sh"))
+	
 	#node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ssh_setup.sh"))
 	#node.addService(pg.Execute(shell="sh", command="sudo -H -u lngo bash -c '/local/repository/ssh_setup.sh'"))
 	node.addService(pg.Execute(shell="sh", command="sudo -H -u BC843101 bash -c '/local/repository/ssh_setup.sh'"))
-
+	
+	node.addService(pg.Execute(shell="sh", command="sudo su BC843101 -c 'cp /local/repository/source/* /users/BC843101'"))
 	#node.addService(pg.Execute(shell="sh", command="sudo su lngo -c 'cp /local/repository/source/* /users/lngo'"))
 
 # Print the RSpec to the enclosing page.
