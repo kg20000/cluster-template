@@ -5,7 +5,8 @@ service rpcbind start
 service nfs start
 mkdir /software
 mkdir /scratch
-sleep 600
+#sleep 600
+sleep 300
 mount -t nfs 192.168.1.1:/software /software
 mount -t nfs 192.168.1.2:/scratch /scratch
 
