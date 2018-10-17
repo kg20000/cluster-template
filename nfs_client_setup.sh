@@ -1,10 +1,12 @@
 #!/bin/sh
-yum install -y nfs-utils nfs-utils-lib
+sudo yum install -y nfs-utils nfs-utils-lib
+sudo yum -y install portmap
+
 chkconfig nfs on
 service rpcbind start
 service nfs start
-mkdir /software
-mkdir /scratch
+sudo mkdir /software
+sudo mkdir /scratch
 #sleep 600
 #sleep 300
 sudo mount -t nfs 192.168.1.1:/software /software
