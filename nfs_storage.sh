@@ -1,14 +1,10 @@
 #!/bin/sh
-set -x
-
-sudo yum -y install nfs-utils
-
 
 yum install -y nfs-utils nfs-utils-lib
 chkconfig nfs on
 service rpcbind start
 service nfs start
-mkdir /software
+#mkdir /software
 mkdir /scratch
 touch /scratch/machine_list
 touch /etc/exports
