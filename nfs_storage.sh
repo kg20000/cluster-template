@@ -20,15 +20,21 @@ for i in range (2,13):
 	#echo "/software 192.168.1." + i + "(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 	#echo "/software compute-" + i + "(rw,sync,no_root_squash)" >> /etc/exports
 
+sleep 180
+sudo mount -t nfs 192.168.1.1:/software /software
 sudo mount -t nfs 192.168.1.2:/scratch /scratch
 
-sudo systemctl enable nfs-server.service
-sudo systemctl start nfs-server.service
+#sudo systemctl enable nfs-server.service
+#sudo systemctl start nfs-server.service
+
+cp /local/repository/source/* /scratch
 
 sudo mkdir /scratch
 mpicc /scratch/hello.c -o /scratch/hello
 sudo chmod 755 /scratch
 
+#mpicc /scratch/pi_mc.c -o /scratch/pi_mc
+#chmod 755 /scratch/pi_mc
 
 sudo mv /local/repository/exports /etc/exports
 
