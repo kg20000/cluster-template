@@ -1,5 +1,5 @@
-sudo yum install -y nfs-utils nfs-utils-lib
-sudo yum install -y portmap
+sudo yum -y install nfs-utils nfs-utils-lib
+sudo yum -y install portmap
 
 /etc/init.d/portmap start
 /etc/init.d/nfs start
@@ -11,7 +11,6 @@ sudo mkdir /software
 sudo vi /etc/exports
 
 #TODO make to for loop 
-/software 192.168.1.2(rw,sync,no_root_squash)
 /software 192.168.1.3(rw,sync,no_root_squash)
 /software 192.168.1.4(rw,sync,no_root_squash)
 /software 192.168.1.5(rw,sync,no_root_squash)
@@ -24,3 +23,4 @@ sudo vi /etc/exports
 /software 192.168.1.12(rw,sync,no_root_squash)
 /software 192.168.1.13(rw,sync,no_root_squash)
 /software 192.168.1.14(rw,sync,no_root_squash)
+/software 192.168.1.15(rw,sync,no_root_squash)
