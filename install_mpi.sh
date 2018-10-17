@@ -11,8 +11,10 @@ sudo ./configure --prefix=/opt/openmpi/3.1.2
 #sudo ./configure --prefix=/software/openmpi/3.1.2
 sudo make
 sudo make all install
-echo "export PATH='$PATH:/opt/openmpi/3.1.2/bin'" >> /users/root/.bashrc
-echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/opt/openmpi/3.1.2/lib/'" >> /users/root/.bashrc
+echo "export PATH='$PATH:/opt/openmpi/3.1.2/bin'" >> /users/BC843101/.bashrc
+echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/opt/openmpi/3.1.2/lib/'" >> /users/BC843101/.bashrc
+#echo "export PATH='$PATH:/opt/openmpi/3.1.2/bin'" >> /users/root/.bashrc
+#echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/opt/openmpi/3.1.2/lib/'" >> /users/root/.bashrc
 #echo "export PATH='$PATH:/software/openmpi/3.1.2/bin'" >> /users/BC843101/.bashrc
 #echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/software/openmpi/3.1.2/lib'" >> /users/BC843101/.bashrc
 cd ..
