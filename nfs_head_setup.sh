@@ -3,8 +3,8 @@ sudo yum -y install portmap
 
 /etc/init.d/portmap start
 /etc/init.d/nfs start
-chkconfig --level 35 portmap on
-chkconfig --level 35 nfs on
+sudo chkconfig --level 35 portmap on
+sudo chkconfig --level 35 nfs on
 
 sudo mkdir /software
 sudo chmod 777 /software
