@@ -48,7 +48,7 @@ for i in range(0, 4):
 		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
 		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
 		# sleep statement so MPI has ample time to properly install
-		node.addService(pg.Execute(shell="sh", command="sleep 15m"))
+		#node.addService(pg.Execute(shell="sh", command="sleep 15m"))
 	elif i == 1:
 		node = request.XenVM("metadata")
 		# Metadata node, maybe remove later?
