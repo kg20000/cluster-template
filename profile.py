@@ -39,31 +39,40 @@ for i in range(0, 4):
 	if i == 0:
 		node = request.XenVM("head")
 		node.routable_control_ip = "true"
+		# addServices to create NFS server on head node (directory: /software)
 		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_head_setup.sh"))
 		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_head_setup.sh"))
 		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountHead.sh"))
 		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mountHead.sh"))
+		# addServices to install MPI in the /software directory on head node
 		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
 		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
-		#node.addService(pg.Execute(shell="sh", command="sleep 15m"))
+		# sleep statement so MPI has ample time to properly install
+		node.addService(pg.Execute(shell="sh", command="sleep 15m"))
 	elif i == 1:
 		node = request.XenVM("metadata")
+		# Metadata node, maybe remove later?
 	elif i == 2:
 		node = request.XenVM("storage")
+		# addServices to create NFS server on storage node (directory: /scratch)
 		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountHead.sh"))
 		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mountHead.sh"))
 		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_storage_setup.sh"))
 		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_storage_setup.sh "))
 		#node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountStorage.sh"))
 		#node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mountStorage.sh"))
+		# copy files to scratch
 		node.addService(pg.Execute(shell="sh", command="sudo cp /local/repository/source/* /scratch"))
 	else:
+		# compute-num nodes
 		node = request.XenVM("compute-" + str(i-2))
 		node.cores = 4
 		node.ram = 4096
 		#node.addService(pg.Execute(shell="sh", command="sudo mkdir /software"))
 		#node.addService(pg.Execute(shell="sh", command="sudo mkdir /scratch"))
 		#node.addService(pg.Execute(shell="sh", command="sudo mount 192.168.1.1:/software /software"))
+		
+		# addServices to call bash scripts to add local mount points to client nodes for NFS's
 		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountHead.sh"))
 		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mountHead.sh"))
 		#node.addService(pg.Execute(shell="sh", command="sudo mount 192.168.1.3:/scratch /scratch"))
