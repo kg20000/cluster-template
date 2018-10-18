@@ -78,6 +78,7 @@ for i in range(0, 4):
 		#node.addService(pg.Execute(shell="sh", command="sudo mount 192.168.1.3:/scratch /scratch"))
 		#node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountStorage.sh"))
 		#node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mountStorage.sh"))
+		node.addService(pg.Execute(shell="sh", command="sudo cp /local/repository/source/* /scratch"))
     
 	node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
 
