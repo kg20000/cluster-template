@@ -12,7 +12,7 @@ sudo chmod 777 /software
 sudo systemctl enable nfs-server.service
 sudo systemctl start nfs-server.service
 
-echo '/software 192.168.1.3(rw,sync,no_root_squash)
+echo '
 /software 192.168.1.3(rw,sync,no_root_squash)
 /software 192.168.1.4(rw,sync,no_root_squash)
 /software 192.168.1.5(rw,sync,no_root_squash)
