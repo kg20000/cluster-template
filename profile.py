@@ -39,14 +39,31 @@ for i in range(0, 4):
 	if i == 0:
 		node = request.XenVM("head")
 		node.routable_control_ip = "true"
+		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_head_setup.sh"))
+		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_head_setup.sh"))
+		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
+		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
+		node.addService(pg.Execute(shell="sh", command="sleep 10m"))
 	elif i == 1:
 		node = request.XenVM("metadata")
 	elif i == 2:
 		node = request.XenVM("storage")
+		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_storage_setup.sh"))
+		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_storage_setup.sh "))
+		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountStorage.sh"))
+		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mountStorage.sh"))
 	else:
 		node = request.XenVM("compute-" + str(i-2))
 		node.cores = 4
 		node.ram = 4096
+		node.addService(pg.Execute(shell="sh", command="sudo mkdir /software"))
+		node.addService(pg.Execute(shell="sh", command="sudo mkdir /scratch"))
+		node.addService(pg.Execute(shell="sh", command="sudo mount 192.168.1.1:/software /software"))
+		#node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountHead.sh"))
+		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mountHead.sh"))
+		node.addService(pg.Execute(shell="sh", command="sudo mount 192.168.1.3:/scratch /scratch"))
+		#node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountStorage.sh"))
+		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mountStorage.sh"))
     
 	node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
 
@@ -57,28 +74,6 @@ for i in range(0, 4):
 
 	node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless.sh"))
 	node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless.sh"))
-
-	#Head node
-	if i == 0:  
-		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_head_setup.sh"))
-		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_head_setup.sh"))
-		#node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
-		#node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
-	#Storage node
-	elif i == 2:
-		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountStorage.sh"))
-		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_storage_setup.sh "))
-		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountStorage.sh"))
-		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mountStorage.sh"))
-	#All remaining nodes
-	else:
-		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountHead.sh"))
-		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mountHead.sh"))
-		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountStorage.sh"))
-		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mountStorage.sh"))
-
-	node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
-	node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
 		
 	node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ssh_setup.sh"))
 	node.addService(pg.Execute(shell="sh", command="sudo /local/repository/ssh_setup.sh"))
