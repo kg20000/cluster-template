@@ -7,6 +7,7 @@ chkconfig --level 35 portmap on
 chkconfig --level 35 nfs on
 
 sudo mkdir /scratch
+sudo chmod 755 /scratch
 
 sudo systemctl enable nfs-server.service
 sudo systemctl start nfs-server.service
