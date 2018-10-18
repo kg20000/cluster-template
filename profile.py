@@ -36,6 +36,17 @@ link = request.LAN("lan")
 #for i in range(0, 15):
 
 for i in range(0, 4):
+	
+#	if i == 0:
+#		#node.addService(pg.Execute(shell="sh", command="sudo -p mkdir /software"))
+#		node.addService(pg.Execute(shell="sh", command="sudo -p mkdir /users/BC843101/software"))
+#	if i == 2:
+#		#node.addService(pg.Execute(shell="sh", command="sudo -p mkdir /scratch"))
+#		node.addService(pg.Execute(shell="sh", command="sudo -p mkdir /users/BC843101/scratch"))
+#	else:
+#		node.addService(pg.Execute(shell="sh", command="sudo -p mkdir /users/BC843101/software"))
+#		node.addService(pg.Execute(shell="sh", command="sudo -p mkdir /users/BC843101/scratch"))
+		
 	if i == 0:
 		node = request.XenVM("head")
 		node.routable_control_ip = "true"
@@ -55,15 +66,17 @@ for i in range(0, 4):
 	elif i == 2:
 		node = request.XenVM("storage")
 		# addServices to create NFS server on storage node (directory: /scratch)
+		#node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountHead.sh"))
+		#node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mountHead.sh"))
+
+		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountStorage.sh"))
+		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mountStorage.sh"))
+		
 		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs_storage_setup.sh"))
 		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs_storage_setup.sh "))
-		node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountHead.sh"))
-		node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mountHead.sh"))
 
-		#node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountStorage.sh"))
-		#node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mountStorage.sh"))
 		# copy files to scratch
-		#node.addService(pg.Execute(shell="sh", command="sudo cp /local/repository/source/* /scratch"))
+		node.addService(pg.Execute(shell="sh", command="sudo cp /local/repository/source/* /scratch"))
 		node.addService(pg.Execute(shell="sh", command="sudo cp /local/repository/source/* /users/BC843101/scratch"))
 	else:
 		# compute-num nodes
@@ -82,10 +95,6 @@ for i in range(0, 4):
 		node.addService(pg.Execute(shell="sh", command="sudo cp /local/repository/source/* /scratch"))
 		node.addService(pg.Execute(shell="sh", command="sudo cp /local/repository/source/* /users/BC843101/scratch"))
 		
-		#node.addService(pg.Execute(shell="sh", command="sudo mount 192.168.1.3:/scratch /scratch"))
-		#node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mountStorage.sh"))
-		#node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mountStorage.sh"))
-    
 	node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
 
 	iface = node.addInterface("if" + str(i))
