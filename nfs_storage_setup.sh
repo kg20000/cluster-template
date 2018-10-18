@@ -13,7 +13,7 @@ sudo systemctl start nfs-server.service
 
 sudo vi /etc/exports
 
-#TODO make to for loop 
+echo '
 /software 192.168.1.3(rw,sync,no_root_squash)
 /software 192.168.1.4(rw,sync,no_root_squash)
 /software 192.168.1.5(rw,sync,no_root_squash)
@@ -26,4 +26,4 @@ sudo vi /etc/exports
 /software 192.168.1.12(rw,sync,no_root_squash)
 /software 192.168.1.13(rw,sync,no_root_squash)
 /software 192.168.1.14(rw,sync,no_root_squash)
-/software 192.168.1.15(rw,sync,no_root_squash)
+/software 192.168.1.15(rw,sync,no_root_squash)' >> /etc/exports
