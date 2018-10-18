@@ -27,6 +27,6 @@ echo '/software 192.168.1.3(rw,sync,no_root_squash)
 /software 192.168.1.12(rw,sync,no_root_squash)
 /software 192.168.1.13(rw,sync,no_root_squash)
 /software 192.168.1.14(rw,sync,no_root_squash)
-/software 192.168.1.15(rw,sync,no_root_squash) >> /etc/exports
+/software 192.168.1.15(rw,sync,no_root_squash)' >> /etc/exports
 
 sudo exportfs -a
